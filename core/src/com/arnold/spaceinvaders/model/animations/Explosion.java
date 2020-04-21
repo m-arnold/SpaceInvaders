@@ -1,6 +1,7 @@
 package com.arnold.spaceinvaders.model.animations;
 
 import com.arnold.spaceinvaders.utils.AnimationManager;
+import com.arnold.spaceinvaders.utils.Utils;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
@@ -11,7 +12,7 @@ public class Explosion implements Animatable{
 
     private AnimationManager animationManager = AnimationManager.getAnimationManager();
 
-    private SpriteBatch batch =  new SpriteBatch();
+    private SpriteBatch batch = Utils.spriteBatch;
     private static Animation<TextureRegion> animation;
 
     private static final int FRAME_COLS = 8, FRAME_ROWS = 8;

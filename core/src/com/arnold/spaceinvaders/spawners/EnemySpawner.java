@@ -1,14 +1,14 @@
 package com.arnold.spaceinvaders.spawners;
 
-import com.arnold.spaceinvaders.utils.EntityManager;
 import com.arnold.spaceinvaders.model.gameobjects.Asteroid;
 import com.arnold.spaceinvaders.model.gameobjects.FiringEnemy;
 import com.arnold.spaceinvaders.model.gameobjects.NonFiringEnemy;
+import com.arnold.spaceinvaders.utils.AssetManager;
+import com.arnold.spaceinvaders.utils.EntityManager;
+import com.arnold.spaceinvaders.utils.Utils;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.utils.TimeUtils;
 
 import java.util.Random;
@@ -17,6 +17,7 @@ public class EnemySpawner {
 
     public static EnemySpawner enemySpawner;
     public EntityManager entityManager;
+    public AssetManager assetManager;
 
     private int spawnCounter;
     private BitmapFont font;
@@ -27,15 +28,12 @@ public class EnemySpawner {
 
     private EnemySpawner(){
         entityManager = EntityManager.getEntityManager();
+        assetManager = AssetManager.getAssetManager();
         endTimeLastWave = TimeUtils.millis();
         waveRunning = false;
         waveMode = null;
 
-        FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("fonts/kenvector_future.ttf"));
-        FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
-        parameter.size = 30;
-        parameter.color = Color.RED;
-        font = generator.generateFont(parameter);
+        font = assetManager.fonts.get("WaveMessageFont");
     }
 
     public static EnemySpawner getEnemySpawner(){
@@ -118,7 +116,7 @@ public class EnemySpawner {
     }
 
     public void renderWaveMessage(){
-        SpriteBatch batch = new SpriteBatch();
+        SpriteBatch batch = Utils.spriteBatch;
 
         String message = "";
         switch(waveMode){

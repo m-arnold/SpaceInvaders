@@ -46,4 +46,13 @@ public class EntityManager {
     public List<Entity> getEntities(){
         return entities;
     }
+
+    public Entity getEntityById(String id) {
+        for (Entity e: entities){
+            if(id.equals(e.id)) {
+                return e;
+            }
+        }
+        return null;
+    }
 }

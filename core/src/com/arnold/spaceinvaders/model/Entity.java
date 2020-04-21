@@ -3,6 +3,7 @@ package com.arnold.spaceinvaders.model;
 import com.arnold.spaceinvaders.utils.AnimationManager;
 import com.arnold.spaceinvaders.utils.AssetManager;
 import com.arnold.spaceinvaders.utils.EntityManager;
+import com.arnold.spaceinvaders.utils.Utils;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -15,7 +16,7 @@ public abstract class Entity {
     protected AssetManager assetManager = AssetManager.getAssetManager();
     protected AnimationManager animationManager = AnimationManager.getAnimationManager();
 
-    protected SpriteBatch spriteBatch = new SpriteBatch();
+    protected SpriteBatch spriteBatch = Utils.spriteBatch;
     protected Texture texture;
     protected Rectangle boundingBox;
 

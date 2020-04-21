@@ -1,5 +1,6 @@
 package com.arnold.spaceinvaders.model.gameobjects;
 
+import com.arnold.spaceinvaders.model.gameobjects.powerUps.PowerUp;
 import com.arnold.spaceinvaders.utils.AnimationManager;
 import com.arnold.spaceinvaders.model.Entity;
 import com.arnold.spaceinvaders.model.animations.Explosion;
@@ -40,9 +41,15 @@ public class Projectile extends Entity {
           ((fromPlayer && collided instanceof Enemy)
           ||(fromPlayer && collided instanceof Asteroid))){
 
+            // Remove entity which was hit
             entityManager.removeEntity(collided);
             entityManager.removeEntity(this);
+            // Spawn explosion
             animationManager.addAnimation(new Explosion(collided.posX, collided.posY));
+            // Add player score
+            ((Player)entityManager.getEntityById("Player")).increaseScore(collided);
+            // Spawn PowerUp
+            PowerUp.spawnPowerUp(collided.posX, collided.posY);
         }
 
         // Update Position of projectile and the corresponding bounding box
