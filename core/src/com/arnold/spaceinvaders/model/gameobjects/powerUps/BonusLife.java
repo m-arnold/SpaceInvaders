@@ -8,6 +8,6 @@ public class BonusLife extends PowerUp {
         this.posX = posX;
         this.posY = posY;
         texture = assetManager.textures.get("LifePowerUp");
-        boundingBox = new Rectangle(posX,posY, texture.getWidth(), texture.getHeight());
+        boundingBox = new Rectangle(posX, posY, texture.getWidth(), texture.getHeight());
     }
 }

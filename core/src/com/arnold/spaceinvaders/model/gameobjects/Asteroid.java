@@ -22,4 +22,15 @@ public class Asteroid extends Entity {
         posY = posY - speedY;
         updateBoundingBox();
     }
+
+    @Override
+    public void destroy() {
+        entityManager.removeEntity(this);
+        // Spawn smaller Asteroids
+        entityManager.addEntity(new SmallAsteroid(posX, posY));
+        entityManager.addEntity(new SmallAsteroid(posX, posY));
+        entityManager.addEntity(new SmallAsteroid(posX, posY));
+        entityManager.addEntity(new SmallAsteroid(posX, posY));
+    }
 }
+

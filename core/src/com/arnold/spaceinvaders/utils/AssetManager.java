@@ -38,6 +38,12 @@ public class AssetManager {
     }
 
     private void loadSounds() {
+        sounds = new HashMap<>();
+        sounds.put("Laser", Gdx.audio.newSound(Gdx.files.internal("sounds/laser.ogg")));
+        sounds.put("PowerUp", Gdx.audio.newSound(Gdx.files.internal("sounds/powerUp.ogg")));
+        sounds.put("Explosion", Gdx.audio.newSound(Gdx.files.internal("sounds/explosion.wav")));
+        sounds.put("MenuMusic", Gdx.audio.newSound(Gdx.files.internal("sounds/menuMusic.wav")));
+        sounds.put("GameMusic", Gdx.audio.newSound(Gdx.files.internal("sounds/gameMusic.wav")));
     }
 
     private void loadFonts() {
@@ -83,6 +89,11 @@ public class AssetManager {
 
         // Load Asteroids Textures
         textures.put("Asteroid", new Texture("textures/meteorBrown_big1.png"));
+        textures.put("AsteroidMedium1", new Texture("textures/meteorBrown_med1.png"));
+        textures.put("AsteroidMedium2", new Texture("textures/meteorBrown_med2.png"));
+        textures.put("AsteroidSmall1", new Texture("textures/meteorBrown_small1.png"));
+        textures.put("AsteroidSmall2", new Texture("textures/meteorBrown_small2.png"));
+
         // Load Player Live Texture
         textures.put("Lives", new Texture("textures/playerLife1_blue.png"));
 

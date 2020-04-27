@@ -4,6 +4,7 @@ import com.arnold.spaceinvaders.utils.AssetManager;
 import com.arnold.spaceinvaders.utils.Utils;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -16,6 +17,8 @@ public abstract class AbstractGameScreen implements Screen {
     private float background1Pos;
     private Texture background2;
     private float background2Pos;
+
+    protected static Sound music;
 
     protected void initMovingBackgroung() {
         background1 = assetManager.textures.get("Background");
@@ -44,6 +47,18 @@ public abstract class AbstractGameScreen implements Screen {
     protected void clear(){
         Gdx.gl.glClearColor(1, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+    }
+
+    protected void playMusic(Sound sound) {
+        if(music == null) {
+            music = sound;
+            music.loop();
+        }
+    }
+
+    protected  void stopMusic() {
+        music.stop();
+        music = null;
     }
 
     @Override

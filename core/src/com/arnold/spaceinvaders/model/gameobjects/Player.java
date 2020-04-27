@@ -146,6 +146,7 @@ public class Player extends Entity {
                 lives++;
             }
         }
+        assetManager.sounds.get("PowerUp").play();
         entityManager.removeEntity(powerUp);
     }
 
@@ -177,8 +178,9 @@ public class Player extends Entity {
      * Called when the player is destroyed. Adds explosion at the
      * players location, reduces lives, checks whether the game is over
      */
-    private void destroy() {
+    public void destroy() {
         animationManager.addAnimation(new Explosion(this.posX,this.posY));
+        assetManager.sounds.get("Explosion").play();
         lives--;
         if(lives > 0) {
             respawn();
@@ -207,6 +209,7 @@ public class Player extends Entity {
             entityManager.addEntity(new Projectile(vector.x+50, vector.y, 10, 3f,true, t));
             entityManager.addEntity(new Projectile(vector.x-50, vector.y, 10, -3f,true, t));
         }
+        assetManager.sounds.get("Laser").play();
     }
 
     /**
@@ -230,6 +233,8 @@ public class Player extends Entity {
             score += 10;
         } else if (entity instanceof Asteroid) {
             score += 5;
+        } else if (entity instanceof SmallAsteroid) {
+            score += 15;
         }
     }
 

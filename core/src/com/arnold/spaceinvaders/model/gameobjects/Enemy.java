@@ -33,5 +33,9 @@ public abstract class Enemy extends Entity {
         }
     }
 
+    public void destroy() {
+        entityManager.removeEntity(this);
+    }
+
     protected abstract void fire();
 }

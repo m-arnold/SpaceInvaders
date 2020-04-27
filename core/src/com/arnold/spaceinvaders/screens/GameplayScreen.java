@@ -30,6 +30,7 @@ public class GameplayScreen extends AbstractGameScreen {
         player = new Player();
         entityManager.addEntity(player);
         initMovingBackgroung();
+        playMusic(assetManager.sounds.get("GameMusic"));
     }
 
     @Override
@@ -42,6 +43,7 @@ public class GameplayScreen extends AbstractGameScreen {
         enemySpawner.spawn();
 
         if (isGameOver()) {
+            stopMusic();
             game.setScreen(new HighscoreScreen(game, player.getScore()));
         }
     }

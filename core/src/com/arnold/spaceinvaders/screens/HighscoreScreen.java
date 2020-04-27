@@ -50,6 +50,7 @@ public class HighscoreScreen extends AbstractGameScreen implements Input.TextInp
 
         highScoreTexture = assetManager.textures.get("HighscoreMenu");
         initMovingBackgroung();
+        playMusic(assetManager.sounds.get("MenuMusic"));
         font = assetManager.fonts.get("HighScoreFont");
         loadHighScoreFile();
 

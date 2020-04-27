@@ -27,6 +27,8 @@ public abstract class Entity {
 
     public abstract void update();
 
+    public abstract void destroy();
+
     public void render() {
         spriteBatch.begin();
         spriteBatch.draw(texture, posX, posY);

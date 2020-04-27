@@ -13,6 +13,11 @@ public abstract class PowerUp extends Entity {
         updateBoundingBox();
     }
 
+    @Override
+    public void destroy() {
+        entityManager.removeEntity(this);
+    }
+
     public static void spawnPowerUp(float posX, float posY) {
         Random r = new Random();
         EntityManager em = EntityManager.getEntityManager();

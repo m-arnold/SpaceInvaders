@@ -31,6 +31,7 @@ public class MainMenuScreen extends AbstractGameScreen {
         Gdx.input.setInputProcessor(stage);
 
         initMovingBackgroung();
+        playMusic(assetManager.sounds.get("MenuMusic"));
 
         startGameButton = new ImageButton(new TextureRegionDrawable(assetManager.textures.get("StartButton")));
         startGameButton.setX((Gdx.graphics.getWidth() / 2) - (startGameButton.getWidth() / 2));
@@ -38,6 +39,7 @@ public class MainMenuScreen extends AbstractGameScreen {
         startGameButton.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
+                stopMusic();
                 game.setScreen(new GameplayScreen(game));
             }
         });
@@ -77,5 +79,4 @@ public class MainMenuScreen extends AbstractGameScreen {
         Utils.spriteBatch.end();
         stage.act();
     }
-
 }
