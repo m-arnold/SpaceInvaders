@@ -146,6 +146,8 @@ public class Player extends Entity {
                 lives++;
             }
         }
+
+        increaseScore(powerUp);
         assetManager.sounds.get("PowerUp").play();
         entityManager.removeEntity(powerUp);
     }
@@ -221,10 +223,10 @@ public class Player extends Entity {
     }
 
     /**
-     * Called when a projectile fired by the player destroyed another
-     * entity. Updates the player score according to the destroyed entity.
+     * Called to increase the score of the player. Called when the player
+     * destroys another entity or collects a powerUp.
      *
-     * @param entity destroyed by the player
+     * @param entity which the player collected or destroyed
      */
     public void increaseScore(Entity entity) {
         if(entity instanceof  FiringEnemy){
@@ -235,6 +237,8 @@ public class Player extends Entity {
             score += 5;
         } else if (entity instanceof SmallAsteroid) {
             score += 15;
+        } else if (entity instanceof PowerUp) {
+            score += 25;
         }
     }
 
