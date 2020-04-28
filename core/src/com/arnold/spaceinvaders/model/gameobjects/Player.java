@@ -14,6 +14,12 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.TimeUtils;
 
+/**
+ * This class contains the player and all necessary methods to update the
+ * player's gamestate and render the player.
+ *
+ * author: Marc Arnold
+ */
 public class Player extends Entity {
 
     private float speedY = 4;
@@ -106,11 +112,10 @@ public class Player extends Entity {
         }
     }
 
-    // TODO: Refactor documentation
     /**
      * Called when the player has collided with an projectile. If the player
-     * is not invincible and has not collided with his an projectile, then
-     * he is destroyed.
+     * is not invincible and has not collided with his own projectile, then
+     * he needs to be destroyed.
      *
      * @param projectile the player collided with
      */

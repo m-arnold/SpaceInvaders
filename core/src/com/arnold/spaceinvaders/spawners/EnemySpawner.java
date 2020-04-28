@@ -1,6 +1,7 @@
 package com.arnold.spaceinvaders.spawners;
 
 import com.arnold.spaceinvaders.model.gameobjects.Asteroid;
+import com.arnold.spaceinvaders.model.gameobjects.Boss;
 import com.arnold.spaceinvaders.model.gameobjects.FiringEnemy;
 import com.arnold.spaceinvaders.model.gameobjects.NonFiringEnemy;
 import com.arnold.spaceinvaders.utils.AssetManager;
@@ -26,12 +27,17 @@ public class EnemySpawner {
     private boolean waveRunning;
     private long endTimeLastWave;
 
+    private Boss boss;
+
+    private int waveCounter;
+
     private EnemySpawner(){
         entityManager = EntityManager.getEntityManager();
         assetManager = AssetManager.getAssetManager();
         endTimeLastWave = TimeUtils.millis();
         waveRunning = false;
         waveMode = null;
+        waveCounter = 0;
 
         font = assetManager.fonts.get("WaveMessageFont");
     }
@@ -50,10 +56,7 @@ public class EnemySpawner {
         }
         // No Wave Running
         else{
-            // Determine next WaveMode
-            if(waveMode == null){
-                waveMode = WaveMode.getRandomWaveMode();
-            }
+            setNextWaveMode();
             renderWaveMessage();
             // If 5 Seconds past since last wave, start new one
             if(TimeUtils.timeSinceMillis(endTimeLastWave) > 5000){
@@ -61,6 +64,18 @@ public class EnemySpawner {
             }
         }
     }
+
+    public void setNextWaveMode() {
+        // Determine next WaveMode
+        if(waveMode == null){
+            if (waveCounter == 0) {
+                waveMode = WaveMode.boss;
+            } else {
+                waveMode = WaveMode.getRandomWaveMode();
+            }
+        }
+    }
+
 
     private void spawn(WaveMode mode){
         switch(mode){
@@ -70,6 +85,16 @@ public class EnemySpawner {
             case asteroids:
                 spawnAsteroids();
                 break;
+            case boss:
+                spawnBoss();
+                break;
+        }
+    }
+
+    public void spawnBoss() {
+        if(boss == null) {
+            boss = new Boss();
+            entityManager.addEntity(boss);
         }
     }
 
@@ -113,6 +138,7 @@ public class EnemySpawner {
         endTimeLastWave = TimeUtils.millis();
         waveRunning = false;
         waveMode = null;
+        waveCounter++;
     }
 
     public void renderWaveMessage(){
@@ -126,6 +152,9 @@ public class EnemySpawner {
             case asteroids:
                 message = "Asteroids ahead!";
                 break;
+            case boss:
+                message = "Boss ahead!";
+                break;
         }
         batch.begin();
         font.draw(batch,message, (Gdx.graphics.getWidth() / 2) - 165,(Gdx.graphics.getHeight() / 2) + 150);
@@ -134,7 +163,8 @@ public class EnemySpawner {
 
     private enum WaveMode{
         asteroids,
-        enemies;
+        enemies,
+        boss;
         private static WaveMode getRandomWaveMode(){
             Random random = new Random();
             return random.nextBoolean() ? enemies : asteroids;
