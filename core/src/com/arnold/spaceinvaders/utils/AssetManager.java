@@ -11,6 +11,11 @@ import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Class containing the AssetManager.
+ *
+ * author: Marc Arnold
+ */
 public class AssetManager {
 
     public static AssetManager assetManager;
@@ -35,6 +40,9 @@ public class AssetManager {
         return assetManager;
     }
 
+    /**
+     * Loads sounds used within the game.
+     */
     private void loadSounds() {
         sounds = new HashMap<>();
         sounds.put("Laser", Gdx.audio.newSound(Gdx.files.internal("sounds/laser.ogg")));
@@ -44,6 +52,9 @@ public class AssetManager {
         sounds.put("GameMusic", Gdx.audio.newSound(Gdx.files.internal("sounds/gameMusic.wav")));
     }
 
+    /**
+     * Loads fonts used within the game.
+     */
     private void loadFonts() {
         fontGenerator = new FreeTypeFontGenerator(Gdx.files.internal("fonts/kenvector_future.ttf"));
 
@@ -66,6 +77,9 @@ public class AssetManager {
         fonts.put("HighScoreFont", fontGenerator.generateFont(parameter));
     }
 
+    /**
+     * Loads textures used within the game.
+     */
     private void loadTextures() {
         textures = new HashMap<>();
         //Load Brackground Texture
@@ -104,6 +118,9 @@ public class AssetManager {
         textures.put("HighscoreMenu", new Texture("textures/HighscoreBackground.png"));
     }
 
+    /**
+     * Loads animations used within the game.
+     */
     private void loadAnimations(){
         Explosion.preloadAnimation();
     }

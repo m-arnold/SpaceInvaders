@@ -4,6 +4,12 @@ import com.arnold.spaceinvaders.model.Entity;
 
 import java.util.Random;
 
+/**
+ * Abstract class containing the enemy. Implements the movement behaviour
+ * for the non firing and firing enemy.
+ *
+ * author: Marc Arnold
+ */
 public abstract class Enemy extends Entity {
 
     protected float speedY;

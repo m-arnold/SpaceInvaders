@@ -2,6 +2,11 @@ package com.arnold.spaceinvaders.model.gameobjects.powerUps;
 
 import com.badlogic.gdx.math.Rectangle;
 
+/**
+ * Class containing the Shield powerup.
+ *
+ * author: Marc Arnold
+ */
 public class Shield extends PowerUp {
 
     public Shield(float posX, float posY) {

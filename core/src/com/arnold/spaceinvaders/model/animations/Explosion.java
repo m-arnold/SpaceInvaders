@@ -8,6 +8,11 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
+/**
+ * Class containing the exlosion animation.
+ *
+ * author: Marc Arnold
+ */
 public class Explosion implements Animatable{
 
     private AnimationManager animationManager = AnimationManager.getAnimationManager();
@@ -50,6 +55,9 @@ public class Explosion implements Animatable{
         statetime = 0;
     }
 
+    /**
+     * Renders explosion to the screen.
+     */
     public void render(){
         statetime += Gdx.graphics.getDeltaTime();
         if(!animation.isAnimationFinished(statetime)){

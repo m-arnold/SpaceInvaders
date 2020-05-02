@@ -14,6 +14,11 @@ import com.badlogic.gdx.utils.TimeUtils;
 
 import java.util.Random;
 
+/**
+ * Class containing the enemy spawner.
+ *
+ * author: Marc Arnold
+ */
 public class EnemySpawner {
 
     public static EnemySpawner enemySpawner;
@@ -51,6 +56,10 @@ public class EnemySpawner {
         return enemySpawner;
     }
 
+    /**
+     * Called from the gameplay screen. Checks whether a wave is running, if not
+     * it starts a new wave.
+     */
     public void spawn() {
         // Wave Running
         if(waveRunning){
@@ -67,14 +76,20 @@ public class EnemySpawner {
         }
     }
 
+    /**
+     * Called if the game is over, resets the enemy spawner
+     */
     public void reset() {
         enemySpawner = new EnemySpawner();
     }
 
+    /**
+     * Sets the mode of the next wave
+     */
     public void setNextWaveMode() {
         // Determine next WaveMode
         if(waveMode == null){
-            if (waveCounter == 3) {
+            if (waveCounter % 3 == 0) {
                 waveMode = WaveMode.boss;
             } else {
                 waveMode = WaveMode.getRandomWaveMode();
@@ -82,7 +97,11 @@ public class EnemySpawner {
         }
     }
 
-
+    /**
+     * Calls more concrete spawn method depending on the given wave mode
+     *
+     * @param mode of the wave currently running
+     */
     private void spawn(WaveMode mode){
         switch(mode){
             case enemies:
@@ -97,6 +116,9 @@ public class EnemySpawner {
         }
     }
 
+    /**
+     * Spawns a boss wave
+     */
     public void spawnBoss() {
         if (!bossSpawned) {
             boss = new Boss();
@@ -110,6 +132,9 @@ public class EnemySpawner {
         }
     }
 
+    /**
+     * Spawns an enemies wave
+     */
     public void spawnEnemies(){
         //Determine Random x-Position for spawning Enemies
         float min = 250;
@@ -131,6 +156,9 @@ public class EnemySpawner {
         spawnCounter++;
     }
 
+    /**
+     * Spawns an asteroid wave
+     */
     public void spawnAsteroids(){
         float min = 50;
         float max = 950;
@@ -145,6 +173,9 @@ public class EnemySpawner {
         spawnCounter++;
     }
 
+    /**
+     * Called to prepare the next wave
+     */
     private void finishWave(){
         spawnCounter = 0;
         bossSpawned = false;
@@ -154,6 +185,9 @@ public class EnemySpawner {
         waveCounter++;
     }
 
+    /**
+     * Renders wave message to the screen
+     */
     public void renderWaveMessage(){
         SpriteBatch batch = Utils.spriteBatch;
 

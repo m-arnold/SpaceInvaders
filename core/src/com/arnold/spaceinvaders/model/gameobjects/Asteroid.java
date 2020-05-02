@@ -5,6 +5,11 @@ import com.arnold.spaceinvaders.model.Entity;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Rectangle;
 
+/**
+ * Class containing the asteroid entity.
+ *
+ * author: Marc Arnold
+ */
 public class Asteroid extends Entity {
 
     float speedY;

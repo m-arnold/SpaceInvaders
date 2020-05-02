@@ -9,6 +9,11 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
+/**
+ * Abstract class for GameScreens. Provides methods which all game screens need.
+ *
+ * author: Marc Arnold
+ */
 public abstract class AbstractGameScreen implements Screen {
 
     protected AssetManager assetManager = AssetManager.getAssetManager();
@@ -20,6 +25,9 @@ public abstract class AbstractGameScreen implements Screen {
 
     protected static Sound music;
 
+    /**
+     * Initializes the moving background
+     */
     protected void initMovingBackgroung() {
         background1 = assetManager.textures.get("Background");
         background1Pos = 0;
@@ -27,6 +35,9 @@ public abstract class AbstractGameScreen implements Screen {
         background2Pos = background1.getHeight();
     }
 
+    /**
+     * Renders the moving background
+     */
     protected void renderMovingBackground(){
         SpriteBatch spriteBatch = Utils.spriteBatch;
         spriteBatch.begin();
@@ -44,11 +55,19 @@ public abstract class AbstractGameScreen implements Screen {
         }
     }
 
+    /**
+     * Clears the canvas
+     */
     protected void clear(){
         Gdx.gl.glClearColor(1, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
     }
 
+    /**
+     * Plays music
+     *
+     * @param sound which will be played
+     */
     protected void playMusic(Sound sound) {
         if(music == null) {
             music = sound;
@@ -56,6 +75,9 @@ public abstract class AbstractGameScreen implements Screen {
         }
     }
 
+    /**
+     * Stops music
+     */
     protected  void stopMusic() {
         music.stop();
         music = null;

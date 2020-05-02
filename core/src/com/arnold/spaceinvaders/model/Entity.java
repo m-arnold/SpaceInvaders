@@ -10,6 +10,12 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 
+/**
+ * The entity class. Contains methods which can be used by concrete
+ * entities.
+ *
+ * author: Marc Arnold
+ */
 public abstract class Entity {
 
     protected EntityManager entityManager = EntityManager.getEntityManager();
@@ -29,12 +35,20 @@ public abstract class Entity {
 
     public abstract void destroy();
 
+    /**
+     * Called to render the entity to the screen.
+     */
     public void render() {
         spriteBatch.begin();
         spriteBatch.draw(texture, posX, posY);
         spriteBatch.end();
     }
 
+    /**
+     * Called to determine the center of the texture.
+     *
+     * @return center of the texture
+     */
     protected Vector2 getCenterOfTexture(){
         Vector2 vector = new Vector2();
         vector.x = posX + (texture.getWidth() / 2);
@@ -46,6 +60,11 @@ public abstract class Entity {
         return boundingBox;
     }
 
+    /**
+     * Checks whether the entity left the screen.
+     *
+     * @return boolean
+     */
     public boolean leftScreen(){
         int width = Gdx.graphics.getWidth();
         int height = Gdx.graphics.getHeight();
@@ -57,11 +76,20 @@ public abstract class Entity {
         return false;
     }
 
+    /**
+     * Updates the bounding box to the current position of the
+     * entity.
+     */
     protected void updateBoundingBox(){
         boundingBox.x = posX;
         boundingBox.y = posY;
     }
 
+    /**
+     * Checks whether the entity collided with another entity and returns it.
+     *
+     * @return collider entity
+     */
     public Entity collidedWith(){
         for(Entity e : entityManager.getEntities()){
             if(this != e &&  boundingBox.overlaps(e.getBoundingBox())){

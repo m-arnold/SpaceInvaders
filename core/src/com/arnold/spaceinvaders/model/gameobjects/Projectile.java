@@ -7,6 +7,11 @@ import com.arnold.spaceinvaders.utils.AnimationManager;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Rectangle;
 
+/**
+ * Class containing the projectile entity.
+ *
+ * author: Marc Arnold
+ */
 public class Projectile extends Entity {
 
     private float speedY;
@@ -47,6 +52,11 @@ public class Projectile extends Entity {
         updateBoundingBox();
     }
 
+    /**
+     * Handles collision with entity
+     *
+     * @param collided entity
+     */
     private void handleCollision(Entity collided) {
         // Collision of projectiles with the player is handled within in the player class
         if (!fromPlayer || collided instanceof Player) {

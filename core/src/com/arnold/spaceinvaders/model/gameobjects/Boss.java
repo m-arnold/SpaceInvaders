@@ -7,6 +7,11 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Rectangle;
 
+/**
+ * Class containing the boss entity.
+ *
+ * author: Marc Arnold
+ */
 public class Boss extends Entity {
 
     private float speedX = 3;

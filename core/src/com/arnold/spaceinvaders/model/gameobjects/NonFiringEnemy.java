@@ -2,6 +2,11 @@ package com.arnold.spaceinvaders.model.gameobjects;
 
 import com.badlogic.gdx.math.Rectangle;
 
+/**
+ * Class containing the non firing enemy entity.
+ *
+ * author: Marc Arnold
+ */
 public class NonFiringEnemy extends Enemy {
 
     public NonFiringEnemy(float posX, float posY){

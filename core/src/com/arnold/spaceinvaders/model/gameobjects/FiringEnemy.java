@@ -3,6 +3,11 @@ package com.arnold.spaceinvaders.model.gameobjects;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Rectangle;
 
+/**
+ * Class containing the firing enemy entity.
+ *
+ * author: Marc Arnold
+ */
 public class FiringEnemy extends Enemy {
 
     public FiringEnemy(float posX, float posY){

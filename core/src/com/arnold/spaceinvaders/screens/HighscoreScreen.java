@@ -19,6 +19,11 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
+/**
+ * Class containing the highscore screen
+ *
+ * author: Marc Arnold
+ */
 public class HighscoreScreen extends AbstractGameScreen implements Input.TextInputListener {
 
     private SpaceInvaders game;
@@ -83,10 +88,19 @@ public class HighscoreScreen extends AbstractGameScreen implements Input.TextInp
         }
     }
 
+    /**
+     * Checks whether the given score is a new highscore
+     *
+     * @param score which will be compared to the highscores
+     * @return boolean
+     */
     boolean isNewHighScore(int score) {
         return score > scores[9].score;
     }
 
+    /**
+     * Updates the scores list with the new entry
+     */
     void updateHighscores() {
         int index = findHighScorePostion();
         for (int i = scores.length -1; i > index; i--) {
@@ -96,6 +110,11 @@ public class HighscoreScreen extends AbstractGameScreen implements Input.TextInp
         updateHighscoreFile();
     }
 
+    /**
+     * Finds the index where the new highscore entry will be inserted
+     *
+     * @return index
+     */
     private int findHighScorePostion() {
         for (int i = 0; i < scores.length; i++) {
             if (possibleNewHighscore > scores[i].score) {
@@ -105,6 +124,9 @@ public class HighscoreScreen extends AbstractGameScreen implements Input.TextInp
         return -1;
     }
 
+    /**
+     * Updates the highscore property file
+     */
     void updateHighscoreFile() {
         try (InputStream input = new FileInputStream("highscore/highscore.properties")) {
             Properties props = new Properties();
@@ -120,6 +142,9 @@ public class HighscoreScreen extends AbstractGameScreen implements Input.TextInp
         }
     }
 
+    /**
+     * Loads the highscore property file into the scores array
+     */
     void loadHighScoreFile() {
         try (InputStream input = new FileInputStream("highscore/highscore.properties")) {
             Properties props = new Properties();
@@ -135,6 +160,9 @@ public class HighscoreScreen extends AbstractGameScreen implements Input.TextInp
         }
     }
 
+    /**
+     * Renders the highscore to the screen
+     */
     void renderHighScore() {
         Utils.spriteBatch.begin();
         for (int i = 0; i <=9; i++) {
@@ -157,6 +185,10 @@ public class HighscoreScreen extends AbstractGameScreen implements Input.TextInp
         updateHighscores();
     }
 
+    /**
+     * Wrapper class used to load the highscore property file into
+     * java objects
+     */
     private class HighScoreEntry {
 
         public String name;

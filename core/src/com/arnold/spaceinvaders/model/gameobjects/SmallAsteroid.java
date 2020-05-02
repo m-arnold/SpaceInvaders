@@ -6,6 +6,11 @@ import com.badlogic.gdx.math.Rectangle;
 
 import java.util.Random;
 
+/**
+ * Class containing the small asteroid entity.
+ *
+ * author: Marc Arnold
+ */
 public class SmallAsteroid extends Entity {
 
     private float speedX;
@@ -32,11 +37,21 @@ public class SmallAsteroid extends Entity {
         entityManager.removeEntity(this);
     }
 
+    /**
+     * Returns random float used to determine speeds.
+     *
+     * @return float
+     */
     private float randomSpeed() {
         Random random = new Random();
         return (random.nextBoolean() ? (-1) * (random.nextInt(6) + 1) : random.nextInt(6) + 1);
     }
 
+    /**
+     * Returns one of four asteroid textures.
+     *
+     * @return texture
+     */
     private Texture getRandomTextures() {
         Random random = new Random();
         switch (random.nextInt(4)) {

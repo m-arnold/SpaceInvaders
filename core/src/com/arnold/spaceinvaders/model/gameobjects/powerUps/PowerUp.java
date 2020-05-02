@@ -5,6 +5,11 @@ import com.arnold.spaceinvaders.utils.EntityManager;
 
 import java.util.Random;
 
+/**
+ * Abstract PowerUp defining movement behaviour for all power ups.
+ *
+ * author: Marc Arnold
+ */
 public abstract class PowerUp extends Entity {
 
     @Override
@@ -18,6 +23,13 @@ public abstract class PowerUp extends Entity {
         entityManager.removeEntity(this);
     }
 
+    /**
+     * Static method used to spawn random powerups at a given location (x,y).
+     * PowerUps are spawned with a 20% chance on call.
+     *
+     * @param posX
+     * @param posY
+     */
     public static void spawnPowerUp(float posX, float posY) {
         Random r = new Random();
         EntityManager em = EntityManager.getEntityManager();

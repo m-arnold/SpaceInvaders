@@ -10,6 +10,11 @@ import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 
+/**
+ * Class containing the main menu screen
+ *
+ * author: Marc Arnold
+ */
 public class MainMenuScreen extends AbstractGameScreen {
 
     private SpaceInvaders game;
