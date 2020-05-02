@@ -32,6 +32,12 @@ public class EntityManager {
         removeAfterUpdate.add(entity);
     }
 
+    public void removeAllEntities() {
+        entities.clear();
+        addAfterUpdate.clear();
+        removeAfterUpdate.clear();
+    }
+
     public void updateEntities(){
         entities.stream().forEach(entity -> entity.update());
         entities.addAll(addAfterUpdate);

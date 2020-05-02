@@ -36,7 +36,7 @@ public class Projectile extends Entity {
 
         // Check whether projectile collided
         Entity collided = collidedWith();
-        // Collision with other Entity (but not with PowerUps)
+        // Collision with other Entity
         if(collided != null) {
             handleCollision(collided);
         }
@@ -48,15 +48,22 @@ public class Projectile extends Entity {
     }
 
     private void handleCollision(Entity collided) {
-        // Projectiles should ignore PowerUps and other Projectile
-        if(collided instanceof PowerUp || collided instanceof Projectile) {
+        // Collision of projectiles with the player is handled within in the player class
+        if (!fromPlayer || collided instanceof Player) {
             return;
         }
-        if(fromPlayer && !(collided instanceof Player)) {
+        // Projectiles should ignore PowerUps and other Projectile
+        if (collided instanceof PowerUp || collided instanceof Projectile) {
+            return;
+        }
+        // Collision with boss enemy
+        if (collided instanceof Boss) {
+            ((Boss) collided).decreaseLife();
+        }
+        // Collision with normal enemy or asteroid
+        else {
             // Destroy entity which was hit
             collided.destroy();
-            // Destroy projectile
-            this.destroy();
             // Spawn explosion
             animationManager.addAnimation(new Explosion(collided.posX, collided.posY));
             // Play explosion sound
@@ -66,6 +73,8 @@ public class Projectile extends Entity {
             // Spawn PowerUp
             PowerUp.spawnPowerUp(collided.posX, collided.posY);
         }
+        // Destroy projectile
+        this.destroy();
     }
 
     @Override

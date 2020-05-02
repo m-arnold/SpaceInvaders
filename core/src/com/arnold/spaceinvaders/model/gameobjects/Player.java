@@ -244,6 +244,8 @@ public class Player extends Entity {
             score += 15;
         } else if (entity instanceof PowerUp) {
             score += 25;
+        } else if (entity instanceof Boss) {
+            score += 500;
         }
     }
 

@@ -28,6 +28,7 @@ public class EnemySpawner {
     private long endTimeLastWave;
 
     private Boss boss;
+    private boolean bossSpawned;
 
     private int waveCounter;
 
@@ -38,6 +39,7 @@ public class EnemySpawner {
         waveRunning = false;
         waveMode = null;
         waveCounter = 0;
+        bossSpawned = false;
 
         font = assetManager.fonts.get("WaveMessageFont");
     }
@@ -49,7 +51,7 @@ public class EnemySpawner {
         return enemySpawner;
     }
 
-    public void spawn(){
+    public void spawn() {
         // Wave Running
         if(waveRunning){
            spawn(waveMode);
@@ -65,10 +67,14 @@ public class EnemySpawner {
         }
     }
 
+    public void reset() {
+        enemySpawner = new EnemySpawner();
+    }
+
     public void setNextWaveMode() {
         // Determine next WaveMode
         if(waveMode == null){
-            if (waveCounter == 0) {
+            if (waveCounter == 3) {
                 waveMode = WaveMode.boss;
             } else {
                 waveMode = WaveMode.getRandomWaveMode();
@@ -92,9 +98,15 @@ public class EnemySpawner {
     }
 
     public void spawnBoss() {
-        if(boss == null) {
+        if (!bossSpawned) {
             boss = new Boss();
             entityManager.addEntity(boss);
+            bossSpawned = true;
+        } else {
+            // Wave finished
+            if (entityManager.getEntityById("Boss") == null) {
+                finishWave();
+            }
         }
     }
 
@@ -135,6 +147,7 @@ public class EnemySpawner {
 
     private void finishWave(){
         spawnCounter = 0;
+        bossSpawned = false;
         endTimeLastWave = TimeUtils.millis();
         waveRunning = false;
         waveMode = null;

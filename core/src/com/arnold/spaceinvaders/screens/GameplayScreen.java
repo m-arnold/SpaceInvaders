@@ -8,6 +8,11 @@ import com.arnold.spaceinvaders.utils.EntityManager;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 
+/**
+ * Class containing the gameplay screen
+ *
+ * author: Marc Arnold
+ */
 public class GameplayScreen extends AbstractGameScreen {
 
     SpaceInvaders game;
@@ -44,10 +49,18 @@ public class GameplayScreen extends AbstractGameScreen {
 
         if (isGameOver()) {
             stopMusic();
+            entityManager.removeAllEntities();
+            animationManager.removeAllAnimations();
+            enemySpawner.reset();
             game.setScreen(new HighscoreScreen(game, player.getScore()));
         }
     }
 
+    /**
+     *  Checks whether the game is over
+     *
+     * @return boolean
+     */
     boolean isGameOver() {
         return player.getLives() == 0;
     }

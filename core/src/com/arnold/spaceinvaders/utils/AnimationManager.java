@@ -27,6 +27,12 @@ public class AnimationManager {
     }
     public void removeAnimation(Animatable animation) { removeAfterUpdate.add(animation);}
 
+    public void removeAllAnimations() {
+        animations.clear();
+        addAfterUpdate.clear();
+        removeAfterUpdate.clear();
+    }
+
     public void renderAnimations(){
         animations.addAll(addAfterUpdate);
         addAfterUpdate.clear();

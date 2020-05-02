@@ -1,6 +1,8 @@
 package com.arnold.spaceinvaders.model.gameobjects;
 
 import com.arnold.spaceinvaders.model.Entity;
+import com.arnold.spaceinvaders.model.animations.Explosion;
+import com.arnold.spaceinvaders.model.gameobjects.powerUps.PowerUp;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Rectangle;
@@ -20,11 +22,12 @@ public class Boss extends Entity {
     private int life;
 
     public Boss() {
+        id = "Boss";
         texture = assetManager.textures.get("Boss");
         this.posX = (Gdx.graphics.getWidth() / 2) - (texture.getWidth() / 2);
         this.posY = 1100;
 
-        life = 200;
+        life = 75;
 
         moveFoward = true;
         moveSideWays = false;
@@ -77,17 +80,26 @@ public class Boss extends Entity {
         updateBoundingBox();
     }
 
-    //TODO: Don't do life logic in here
     @Override
     public void destroy() {
-
-        if(life > 1) {
-            life--;
-        } else{
-            entityManager.removeEntity(this);
-        }
+        entityManager.removeEntity(this);
+        // Spawn explosion
+        animationManager.addAnimation(new Explosion(this.posX, this.posY));
+        animationManager.addAnimation(new Explosion(this.posX + 100, this.posY - 100));
+        animationManager.addAnimation(new Explosion(this.posX + 100, this.posY + 100));
+        animationManager.addAnimation(new Explosion(this.posX - 100, this.posY - 100));
+        animationManager.addAnimation(new Explosion(this.posX - 100, this.posY + 100));
+        // Play explosion sound
+        assetManager.sounds.get("Explosion").play();
+        // Add player score
+        ((Player) entityManager.getEntityById("Player")).increaseScore(this);
+        // Spawn PowerUp
+        PowerUp.spawnPowerUp(this.posX, this.posY);
     }
 
+    /**
+     * Called by the boss to fire projectiles
+     */
     private void fire() {
         for(int i = 0; i <=7; i++) {
             entityManager.addEntity(
@@ -100,4 +112,14 @@ public class Boss extends Entity {
         }
     }
 
+    /**
+     * Called to decrease the boss live. Checks whether the boss needs to be destroyed
+     */
+    public void decreaseLife() {
+        life--;
+        System.out.println("Life: " + life);
+        if(life == 0) {
+            destroy();
+        }
+    }
 }
