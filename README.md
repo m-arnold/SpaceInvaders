@@ -57,3 +57,5 @@ Game sounds in general: https://www.kenney.nl/assets/digital-audio
 Explosion sound: https://opengameart.org/content/bombexplosion8bit
 
 ### Implementation
+
+This was my first libGDX project and it was learning by doing most of the time. Don't expect libGDX best practises. I tried to keep the code as clean as possible. Some aspects (e.g the entity system class hierarchy) could definitly be improved.
