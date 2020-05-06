@@ -9,6 +9,7 @@ import com.arnold.spaceinvaders.utils.EntityManager;
 import com.arnold.spaceinvaders.utils.Utils;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.TimeUtils;
 
@@ -43,7 +44,7 @@ public class EnemySpawner {
         endTimeLastWave = TimeUtils.millis();
         waveRunning = false;
         waveMode = null;
-        waveCounter = 0;
+        waveCounter = 1;
         bossSpawned = false;
 
         font = assetManager.fonts.get("WaveMessageFont");
@@ -203,8 +204,10 @@ public class EnemySpawner {
                 message = "Boss ahead!";
                 break;
         }
+        GlyphLayout glyphLayout = new GlyphLayout();
+        glyphLayout.setText(font, message);
         batch.begin();
-        font.draw(batch,message, (Gdx.graphics.getWidth() / 2) - 165,(Gdx.graphics.getHeight() / 2) + 150);
+        font.draw(batch,message, (Gdx.graphics.getWidth() / 2) - (glyphLayout.width / 2),(Gdx.graphics.getHeight() / 2) + 150);
         batch.end();
     }
 
