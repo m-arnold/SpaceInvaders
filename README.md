@@ -5,10 +5,13 @@
 
 ![Bild3](https://github.com/m-arnold/SpaceInvaders/blob/master/ReadmeRessources/Bossfight.png)
 
+A SpaceInvaders game implemented in Java using LibGDX. The project's purpose was fun and to get familiar with libGDX. For further information see [Implementation](#implementation).
+
 ### Table of Contents
 1. [Get Started](#get-started)
 2. [Credits](#credits)
 3. [Implementation](#implementation)
+
 
 ### Get Started
 
