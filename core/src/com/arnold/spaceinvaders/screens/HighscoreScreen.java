@@ -5,6 +5,7 @@ import com.arnold.spaceinvaders.utils.AssetManager;
 import com.arnold.spaceinvaders.utils.Utils;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -12,12 +13,6 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
-
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.Properties;
 
 /**
  * Class containing the highscore screen
@@ -57,7 +52,7 @@ public class HighscoreScreen extends AbstractGameScreen implements Input.TextInp
         initMovingBackgroung();
         playMusic(assetManager.sounds.get("MenuMusic"));
         font = assetManager.fonts.get("HighScoreFont");
-        loadHighScoreFile();
+        loadHighScorePreferences();
 
         backButton = new ImageButton(new TextureRegionDrawable(AssetManager.getAssetManager().textures.get("BackButton")));
         backButton.setX((Gdx.graphics.getWidth() / 2) - (backButton.getWidth() / 2));
@@ -107,7 +102,7 @@ public class HighscoreScreen extends AbstractGameScreen implements Input.TextInp
             scores[i] = scores[i-1];
         }
         scores[index] = new HighScoreEntry(playerName, possibleNewHighscore);
-        updateHighscoreFile();
+        updateHighscorePreferences();
     }
 
     /**
@@ -125,38 +120,30 @@ public class HighscoreScreen extends AbstractGameScreen implements Input.TextInp
     }
 
     /**
-     * Updates the highscore property file
+     * Updates the highscore preferences
      */
-    void updateHighscoreFile() {
-        try (InputStream input = new FileInputStream("highscore/highscore.properties")) {
-            Properties props = new Properties();
-            props.load(input);
+    void updateHighscorePreferences() {
+        Preferences prefs = Gdx.app.getPreferences("HighScore");
 
-            for (int i = 0; i <= 9; i++) {
-                props.setProperty(i + ".name", scores[i].name);
-                props.setProperty(i + ".score", String.valueOf(scores[i].score));
-            }
-            props.store(new FileOutputStream("highscore/highscore.properties"),null);
-        } catch (IOException e) {
-            e.printStackTrace();
+        for (int i = 0; i <= 9; i++) {
+            prefs.putString(i + ".name", scores[i].name);
+            prefs.putInteger(i + ".score", scores[i].score);
         }
+        prefs.flush();
     }
 
     /**
-     * Loads the highscore property file into the scores array
+     * Loads the highscore preferences into the scores array
      */
-    void loadHighScoreFile() {
-        try (InputStream input = new FileInputStream("highscore/highscore.properties")) {
-            Properties props = new Properties();
-            props.load(input);
+    void loadHighScorePreferences() {
+        Preferences prefs = Gdx.app.getPreferences("HighScore");
 
-            scores = new HighScoreEntry[10];
-            for (int i = 0; i <= 9; i++) {
-                scores[i] = new HighScoreEntry((String) props.get(i + ".name"),
-                                                Integer.parseInt((String) props.get(i + ".score")));
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
+        scores = new HighScoreEntry[10];
+        for (int i = 0; i <= 9; i++) {
+            String name = prefs.getString(i + ".name");
+            name = (name == "") ? "Not placed" : name;
+            int score = prefs.getInteger(i + ".score");
+            scores[i] = new HighScoreEntry(name, score);
         }
     }
 
