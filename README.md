@@ -32,4 +32,28 @@ java -jar desktop-1.0.jar
 
 ### Credits
 
+#### Textures
+All game and menu textures are from kenney.nl:
+
+https://www.kenney.nl/assets/space-shooter-extension
+
+https://www.kenney.nl/assets/space-shooter-redux
+
+https://www.kenney.nl/assets/ui-pack-space-expansion
+
+kenney.nl has lots of free game textures. Please spent them a visit.
+
+
+#### Animations
+Explosion: https://opengameart.org/content/2d-explosion-animations-frame-by-frame. Really great explosion animation, visit their facebook: https://www.facebook.com/sinestesiastudio
+
+#### Sounds
+Main menu music: https://opengameart.org/content/retro
+
+Game music: https://opengameart.org/content/8-bit-battle-theme-famitracker
+
+Game sounds in general: https://www.kenney.nl/assets/digital-audio 
+
+Explosion sound: https://opengameart.org/content/bombexplosion8bit
+
 ### Implementation
