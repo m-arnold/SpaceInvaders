@@ -48,7 +48,7 @@ https://www.kenney.nl/assets/space-shooter-redux
 
 https://www.kenney.nl/assets/ui-pack-space-expansion
 
-kenney.nl has lots of free game textures. Please spent them a visit.
+kenney.nl has lots of free game textures. Please give them a visit.
 
 
 #### Animations
